@@ -104,18 +104,21 @@ border-radius:50rem;
 @media(max-width:768px){
 
 .asc{
-font-size:6px;
-line-height:6px;
+font-family:monospace;
+font-size:5px;
+line-height:5px;
+letter-spacing:-0.4px;
+white-space:pre;
 overflow:hidden;
 }
 
 .tbr{
-display:none
+display:none;
 }
 
 .bl{
 width:110px;
-font-size:0.75rem
+font-size:0.75rem;
 }
 
 #out{
@@ -130,12 +133,24 @@ padding:0.5rem 0.8rem;
 .tbl{
 font-size:0.7rem;
 word-break:break-word;
+overflow:hidden;
 }
 
 .osp{
-font-size:5px;
-line-height:5px;
+font-family:monospace;
+font-size:4px;
+line-height:4px;
+letter-spacing:-0.4px;
+white-space:pre;
 overflow:hidden;
+}
+
+.pr{
+font-size:0.60rem;
+max-width:140px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
 }
 
 .hr{
@@ -146,7 +161,17 @@ gap:0.2rem;
 .hc{
 width:auto;
 }
+
+#cur{
+display:none !important;
 }
+
+body{
+cursor:auto;
+}
+
+}
+
 @media (hover:none) and (pointer:coarse){
 
 body{
@@ -155,6 +180,7 @@ cursor:auto;
 
 #cur{
 display:none !important;
+pointer-events:none;
 }
 
 }
