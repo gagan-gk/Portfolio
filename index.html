@@ -184,20 +184,6 @@ pointer-events:none;
 }
 
 }
-.clink{
-color:#00d9ff;
-text-decoration:none;
-word-break:break-word;
-}
-
-.clink:hover{
-color:#00ff41;
-text-shadow:0 0 8px #00ff41;
-}
-
-.contact-box div{
-margin:0.45rem 0;
-}
 </style>
 </head>
 <body class="bg-black text-success">
@@ -420,76 +406,12 @@ const cmds={
     });br();
     ach('certs','Credentials Verified! 🏅');
   },
-contact(){
-
-br();
-p(`<span class="oh">// CONTACT: ESTABLISH CONNECTION</span>`);
-br();
-
-p(`
-<div class="sec contact-box">
-
-<div>
-<span class="ow">EMAIL    :</span>
-<a href="mailto:gagankumargoud@gmail.com"
-class="clink">
-gagankumargoud@gmail.com
-</a>
-</div>
-
-<div>
-<span class="ow">LINKEDIN :</span>
-<a href="https://linkedin.com/in/gagan-gk"
-target="_blank"
-class="clink">
-linkedin.com/in/gagan-gk
-</a>
-</div>
-
-<div>
-<span class="ow">GITHUB   :</span>
-<a href="https://github.com/gagan-gk"
-target="_blank"
-class="clink">
-github.com/gagan-gk
-</a>
-</div>
-
-<div>
-<span class="ow">CREDLY   :</span>
-<a href="https://credly.com/users/gagan-kumar-goud-kesari"
-target="_blank"
-class="clink">
-credly.com/users/gagan-kumar-goud-kesari
-</a>
-</div>
-
-<div>
-<span class="ow">GCP      :</span>
-<a href="https://skills.google"
-target="_blank"
-class="clink">
-skills.google/public_profiles/f773eb17...
-</a>
-</div>
-
-<div>
-<span class="ow">STATUS   :</span>
-<span class="os">● OPEN TO CLOUD & SECURITY ROLES</span>
-</div>
-
-</div>
-`);
-
-br();
-
-p(`<span class="od">// Ping me for Cloud Engineering or Cloud Security opportunities</span>`);
-
-br();
-
-ach('contact','Channel Opened! 📡');
-
-},
+  contact(){
+    br();p(`<span class="oh">// CONTACT: ESTABLISH CONNECTION</span>`);br();
+    p(`<div class="sec"><div><span class="ow">EMAIL    :</span> <span class="ov">gagankumargoud@gmail.com</span></div><div><span class="ow">LINKEDIN :</span> <span class="oc">linkedin.com/in/gagan-gk</span></div><div><span class="ow">GITHUB   :</span> <span class="oc">github.com/gagan-gk</span></div><div><span class="ow">CREDLY   :</span> <span class="oc">credly.com/users/gagan-kumar-goud-kesari</span></div><div><span class="ow">GCP      :</span> <span class="oc">skills.google/public_profiles/f773eb17...</span></div><div><span class="ow">STATUS   :</span> <span class="os">● OPEN TO CLOUD & SECURITY ROLES</span></div></div>`);br();
+    p(`<span class="od">// Ping me for Cloud Engineering or Cloud Security opportunities</span>`);br();
+    ach('contact','Channel Opened! 📡');
+  },
   ls(){
     br();p(`<span class="od">total 8 files</span>`);
     [['about.txt','identity & bio'],['skills.db','technical skills'],['experience.log','work history'],['projects/','built things'],['certs.json','credentials & badges'],['contact.conf','reach me'],['secrets.enc','[ENCRYPTED]']].forEach(([f,d])=>p(`drwxr-xr-x  <span class="oc">${f}</span>  <span class="od">// ${d}</span>`));
@@ -515,7 +437,7 @@ ach('contact','Channel Opened! 📡');
     else{c.style.opacity='0.07';p(`<span class="os">MATRIX INTENSITY: NORMAL</span>`);}br();
   },
   async 'sudo hire gagan'(){
-    br();p(`<span class="ow">[sudo] password for recruiter (enter your name): </span>`);await sl(1800);
+    br();p(`<span class="ow">[sudo] password for recruiter: </span>`);await sl(1800);
     p(`<span class="os">Authentication successful.</span>`);await sl(300);
     p(`<span class="ow">Executing: hire gagan_kumar_kesari --role=cloud-security --package=competitive...</span>`);
     await sl(400);
