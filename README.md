@@ -54,7 +54,7 @@ sudo hire gagan
 ## GitHub Pages
 
 ```txt
-https://your-username.github.io/repository-name/
+https://gagan-gk.github.io/Portfolio/
 ```
 
 ---
