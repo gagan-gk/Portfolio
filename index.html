@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GK_KESARI // CLOUD SECURITY ENGINEER</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--green:#00ff41;--green2:#00cc33;--green3:#009922;--dim:#003311;--bg:#000a00;--amber:#ffb000;--red:#ff0040;--cyan:#00ffff;--white:#ccffcc}
+body{
+background:var(--bg);
+color:var(--green);
+font-family:'Share Tech Mono',monospace;
+height:100vh;
+overflow:hidden;
+cursor:none
+}
+#cur{position:fixed;width:2px;height:18px;background:var(--green);pointer-events:none;z-index:9999;transform:translate(-1px,-9px);animation:blink 1s infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+#mx{position:fixed;top:0;left:0;z-index:0;opacity:0.07}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 4px);z-index:1;pointer-events:none}
+body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,0.8) 100%);z-index:1;pointer-events:none}
+#boot{position:fixed;top:0;left:0;right:0;bottom:0;z-index:100;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem}
+.bt{font-family:'VT323',monospace;font-size:clamp(0.85rem,1.8vw,1rem);line-height:1.8;max-width:720px;width:100%}
+.ok{color:var(--green)}.warn{color:var(--amber)}.err{color:var(--red)}.info{color:var(--cyan)}.dim{color:var(--green3)}
+.pbar{width:100%;max-width:500px;height:4px;background:var(--dim);margin:1rem 0;border:1px solid var(--green3)}
+.pfill{height:100%;background:var(--green);width:0%;transition:width 0.1s;box-shadow:0 0 10px var(--green)}
+.asc{
+font-family:'Courier New', monospace;
+font-size:12px;
+line-height:12px;
+color:#00ff41;
+margin-bottom:0.5rem;
+white-space:pre;
+text-align:left;
+overflow:hidden;
+}
+#term{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;flex-direction:column}
+.tbar{background:rgba(0,20,0,0.95);border-bottom:1px solid var(--green3);padding:0.4rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.tbl{font-family:'VT323',monospace;font-size:1.1rem;color:var(--green)}
+.tbr{font-size:0.7rem;color:var(--green3);display:flex;gap:1.5rem}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px}
+.dr{background:var(--red);box-shadow:0 0 6px var(--red)}.da{background:var(--amber);box-shadow:0 0 6px var(--amber)}.dg{background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite}
+#out{flex:1;overflow-y:auto;padding:1rem 1.5rem;font-size:clamp(0.72rem,1.4vw,0.88rem);line-height:1.7;scroll-behavior:smooth}
+#out::-webkit-scrollbar{width:4px}#out::-webkit-scrollbar-thumb{background:var(--green3)}
+.ir{display:flex;align-items:center;padding:0.6rem 1.5rem;border-top:1px solid var(--green3);background:rgba(0,10,0,0.9);flex-shrink:0;gap:0.5rem}
+.pr{
+color:var(--green);
+font-size:clamp(0.60rem,1.2vw,0.82rem);
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+max-width:140px;
+}
+.pr .at{color:var(--amber)}.pr .ho{color:var(--green2)}
+#ci{flex:1;background:transparent;border:none;color:var(--green);font-family:'Share Tech Mono',monospace;font-size:clamp(0.72rem,1.4vw,0.88rem);outline:none;caret-color:var(--green)}
+.ol{margin-bottom:0.1rem}
+.oh{color:var(--green);font-family:'VT323',monospace;font-size:1.3rem;text-shadow:0 0 10px var(--green)}
+.oc{color:var(--cyan)}.os{color:var(--green);text-shadow:0 0 8px rgba(0,255,65,0.5)}.ow{color:var(--amber)}.oe{color:var(--red)}.od{color:var(--green3)}.ov{color:var(--white)}
+.osp{
+color:#00ff41;
+font-family:'Courier New', monospace;
+font-size:14px;
+line-height:14px;
+white-space:pre;
+display:block;
+text-align:left;
+letter-spacing:0;
+overflow:hidden;
+}
+.sec{
+border:1px solid var(--green3);
+padding:0.8rem;
+margin:0.5rem 0;
+background:rgba(0,20,0,0.4);
+border-radius:0.5rem;
+box-shadow:0 0 10px rgba(0,255,65,0.1);
+}
+.tag{
+display:inline-block;
+background:rgba(0,255,65,0.08);
+border:1px solid var(--green3);
+color:var(--green);
+padding:0.25rem 0.6rem;
+margin:0.2rem;
+font-size:0.78rem;
+border-radius:50rem;
+}
+.br{display:flex;align-items:center;gap:1rem;margin:0.3rem 0}
+.bl{width:180px;color:var(--white);font-size:0.82rem;flex-shrink:0}
+.bt2{flex:1;height:5px;background:var(--dim);border:1px solid var(--green3)}
+.bp{width:35px;text-align:right;color:var(--green);font-size:0.78rem}
+.hr{display:flex;gap:2rem;margin:0.2rem 0}
+.hc{color:var(--cyan);width:180px;flex-shrink:0}.hd{color:var(--green3)}
+.glitch{animation:glitch 0.3s infinite}
+@keyframes glitch{0%{color:var(--green)}20%{color:var(--cyan);transform:skew(-2deg)}40%{color:var(--green)}60%{color:var(--red);transform:skew(2deg)}80%{color:var(--green)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+#ach{position:fixed;top:5rem;right:1rem;background:rgba(0,20,0,0.95);border:1px solid var(--amber);padding:0.8rem 1.2rem;z-index:200;display:none}
+#ach.show{display:block;animation:sli 0.3s ease}
+@keyframes sli{from{transform:translateX(80px);opacity:0}to{transform:translateX(0);opacity:1}}
+.at2{color:var(--amber);font-size:0.72rem;letter-spacing:2px}.ax{color:var(--green);font-size:0.9rem;margin-top:0.2rem}
+@media(max-width:768px){
+
+.asc{
+font-size:6px;
+line-height:6px;
+overflow:hidden;
+}
+
+.tbr{
+display:none
+}
+
+.bl{
+width:110px;
+font-size:0.75rem
+}
+
+#out{
+padding:0.8rem !important;
+font-size:0.72rem;
+}
+
+.tbar{
+padding:0.5rem 0.8rem;
+}
+
+.tbl{
+font-size:0.7rem;
+word-break:break-word;
+}
+
+.osp{
+font-size:5px;
+line-height:5px;
+overflow:hidden;
+}
+
+.hr{
+flex-direction:column;
+gap:0.2rem;
+}
+
+.hc{
+width:auto;
+}
+}
+@media (hover:none) and (pointer:coarse){
+
+body{
+cursor:auto;
+}
+
+#cur{
+display:none !important;
+}
+
+}
+</style>
+</head>
+<body class="bg-black text-success">
+<div id="cur"></div>
+<canvas id="mx"></canvas>
+<div id="ach"><div class="at2">⚡ ACHIEVEMENT UNLOCKED</div><div class="ax" id="axm"></div></div>
+
+<div id="boot"
+class="position-fixed top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center p-4">
+  <div class="asc" id="asc"></div>
+  <div class="bt" id="btxt"></div>
+  <div class="pbar"><div class="pfill" id="pf"></div></div>
+  <div class="dim" id="bst" style="font-size:0.85rem">Initializing...</div>
+</div>
+
+<div id="term"
+class="position-fixed top-0 start-0 w-100 h-100 flex-column">
+  <div class="tbar d-flex justify-content-between align-items-center flex-shrink-0">
+    <div class="tbl"><span class="dot dr"></span><span class="dot da"></span><span class="dot dg"></span>&nbsp; Gagan_Kumar@CLOUD-BASTION:~$</div>
+    <div class="tbr d-flex gap-4"><span>AWS▸ACTIVE</span><span>AZURE▸ACTIVE</span><span>GCP▸ACTIVE</span><span id="clk"></span></div>
+  </div>
+  <div id="out"
+class="flex-grow-1 overflow-auto px-4 py-3 font-monospace"></div>
+  <div class="ir d-flex align-items-center gap-2 flex-shrink-0">
+    <div class="pr"><span>Gagan_Kumar</span><span class="at">@</span><span class="ho">cloud-bastion</span>:~$&nbsp;</div>
+    <input type="text" id="ci" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="type 'help' to begin...">
+  </div>
+</div>
+
+<script>
+const mc=document.getElementById('mx'),mctx=mc.getContext('2d');
+mc.width=window.innerWidth;mc.height=window.innerHeight;
+const cols=Math.floor(mc.width/16),drops=Array(cols).fill(1);
+const chars='アイウエオカ01ABCDEF</>{}CLOUD AWS AZURE GCP SEC';
+function dm(){mctx.fillStyle='rgba(0,10,0,0.05)';mctx.fillRect(0,0,mc.width,mc.height);mctx.fillStyle='#00ff41';mctx.font='14px Share Tech Mono';drops.forEach((y,i)=>{mctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*16,y*16);if(y*16>mc.height&&Math.random()>0.975)drops[i]=0;drops[i]++;})}
+setInterval(dm,50);
+window.addEventListener('resize',()=>{mc.width=window.innerWidth;mc.height=window.innerHeight});
+document.addEventListener('mousemove',e=>{const c=document.getElementById('cur');c.style.left=e.clientX+'px';c.style.top=e.clientY+'px'});
+setInterval(()=>{const el=document.getElementById('clk');if(el)el.textContent=new Date().toTimeString().slice(0,8)},1000);
+
+const logo=`
+ ██████╗  █████╗  ██████╗  █████╗ ███╗   ██╗    ██╗  ██╗██╗   ██╗███╗   ███╗ █████╗ ██████╗
+██╔════╝ ██╔══██╗██╔════╝ ██╔══██╗████╗  ██║    ██║ ██╔╝██║   ██║████╗ ████║██╔══██╗██╔══██╗
+██║  ███╗███████║██║  ███╗███████║██╔██╗ ██║    ██║██║  ██║   ██║██╔████╔██║███████║██████╔╝
+██║   ██║██╔══██║██║   ██║██╔══██║██║╚██╗██║    ██╔═██╗ ██║   ██║██║╚██╔╝██║██╔══██║██╔══██╗
+╚██████╔╝██║  ██║╚██████╔╝██║  ██║██║ ╚████║    ██║  ██╗╚██████╔╝██║ ╚═╝ ██║██║  ██║██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+`;
+
+const bootSeq=[
+  ['dim','BIOS v4.2.1 — GK_BASTION SYSTEMS'],
+  ['dim','Copyright (C) 2025 Gagan Kumar Kesari. All rights reserved.'],
+  ['',''],
+  ['info','[ BOOT ] Initializing cloud security protocols...'],
+  ['ok','[ OK   ] AWS credentials loaded'],
+  ['ok','[ OK   ] Azure subscription active'],
+  ['ok','[ OK   ] GCP service account authenticated'],
+  ['ok','[ OK   ] Snowflake SnowPro Core cluster connected'],
+  ['warn','[ WARN ] Offensive security modules detected'],
+  ['ok','[ OK   ] FHIR API gateway initialized — HIPAA compliant'],
+  ['ok','[ OK   ] Fortigate + Palo Alto firewall rules loaded'],
+  ['ok','[ OK   ] SIEM monitoring active — 0 threats detected'],
+  ['ok','[ OK   ] TryHackMe achievements verified'],
+  ['ok','[ OK   ] 45 GCP skill badges authenticated'],
+  ['ok','[ OK   ] Snowflake SnowPro Core certification active'],
+  ['info','[ BOOT ] Loading portfolio data...'],
+  ['ok','[ OK   ] 3+ years experience modules loaded'],
+  ['ok','[ OK   ] HackerRank SQL 5-Star verified'],
+  ['',''],
+  ['ok','[ READY ] System breach authorized. Welcome, operator.'],
+  ['dim','Type "help" to begin.'],
+];
+
+const sl=ms=>new Promise(r=>setTimeout(r,ms));
+
+async function runBoot(){
+  document.getElementById('asc').textContent=logo;
+  const bt=document.getElementById('btxt'),pf=document.getElementById('pf'),bs=document.getElementById('bst');
+  await sl(400);
+  for(let i=0;i<bootSeq.length;i++){
+    const[t,tx]=bootSeq[i];
+    const d=document.createElement('div');
+    d.className=t;d.textContent=tx;bt.appendChild(d);
+    pf.style.width=((i/bootSeq.length)*100)+'%';
+    bs.textContent=tx||'Processing...';
+    await sl(t==='ok'?70:t==='warn'?180:40);
+  }
+  pf.style.width='100%';
+  await sl(700);
+  const b=document.getElementById('boot');
+  b.style.transition='opacity 0.5s';b.style.opacity='0';
+  await sl(500);b.style.display='none';
+  const tm=document.getElementById('term');tm.style.display='flex';
+  await sl(100);welcome();
+  document.getElementById('ci').focus();
+}
+
+const out=document.getElementById('out');
+function p(html,cls='ol'){const d=document.createElement('div');d.className=cls;d.innerHTML=html;out.appendChild(d);out.scrollTop=out.scrollHeight}
+function br(){p('','ol')}
+
+const unlocked=new Set();
+function ach(id,txt){
+  if(unlocked.has(id))return;unlocked.add(id);
+  const el=document.getElementById('ach');
+  document.getElementById('axm').textContent=txt;
+  el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3500);
+}
+
+function welcome(){
+  p(`<div><span class="osp">
+ ██████╗  █████╗  ██████╗  █████╗ ███╗   ██╗    ██╗  ██╗██╗   ██╗███╗   ███╗ █████╗ ██████╗
+██╔════╝ ██╔══██╗██╔════╝ ██╔══██╗████╗  ██║    ██║ ██╔╝██║   ██║████╗ ████║██╔══██╗██╔══██╗
+██║  ███╗███████║██║  ███╗███████║██╔██╗ ██║    ██║██║  ██║   ██║██╔████╔██║███████║██████╔╝
+██║   ██║██╔══██║██║   ██║██╔══██║██║╚██╗██║    ██╔═██╗ ██║   ██║██║╚██╔╝██║██╔══██║██╔══██╗
+╚██████╔╝██║  ██║╚██████╔╝██║  ██║██║ ╚████║    ██║  ██╗╚██████╔╝██║ ╚═╝ ██║██║  ██║██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+</span></div>`);
+  br();
+  p(`<span class="oc">╔══════════════════════════════════════════════════════════╗</span>`);
+  p(`<span class="oc">║</span>  <span class="ow">OPERATOR  :</span> <span class="ov">Gagan Kumar Kesari</span>                          <span class="oc">║</span>`);
+  p(`<span class="oc">║</span>  <span class="ow">ROLE      :</span> <span class="ov">Cloud Engineer | Security Enthusiast</span>        <span class="oc">║</span>`);
+  p(`<span class="oc">║</span>  <span class="ow">EXP       :</span> <span class="ov">3+ Years | AWS | Azure | GCP</span>                <span class="oc">║</span>`);
+  p(`<span class="oc">║</span>  <span class="ow">LOCATION  :</span> <span class="ov">Hyderabad, India</span>                            <span class="oc">║</span>`);
+  p(`<span class="oc">║</span>  <span class="ow">STATUS    :</span> <span class="os">● OPEN TO OPPORTUNITIES</span>                     <span class="oc">║</span>`);
+  p(`<span class="oc">╚══════════════════════════════════════════════════════════╝</span>`);
+  br();
+  p(`<span class="od">// Type <span class="oc">help</span> to see all commands</span>`);
+  p(`<span class="od">// Try <span class="oc">sudo hire Gagan</span> if the user is lucky 😏</span>`);
+  br();
+}
+
+const cmds={
+  help(){
+    br();p(`<span class="oh">// AVAILABLE COMMANDS</span>`);br();
+    [['about','Who is Gagan?'],['skills','Technical skills'],['experience','Work history'],['projects','Projects built'],['certs','Certifications & badges'],['contact','Get in touch'],['ls','List data files'],['whoami','Quick identity check'],['hack','...try it 😏'],['matrix','Toggle matrix rain'],['clear','Clear terminal'],['sudo hire gagan','Best career decision']].forEach(([c,d])=>p(`<div class="hr"><span class="hc">${c}</span><span class="hd">// ${d}</span></div>`));
+    br();p(`<span class="od">↑↓ arrow keys for history | Tab to autocomplete</span>`);br();
+    ach('help','First Command! Welcome Aboard 🖥️');
+  },
+ h(){
+    cmds.help();
+  },
+  whoami(){
+    br();p(`<span class="os">GAGAN_KUMAR_KESARI</span>`);p(`<span class="od">uid=1337(gagan) gid=1337(cloud-sec) groups=cloud,security,devops,hackers</span>`);br();
+  },
+  about(){
+    br();p(`<span class="oh">// ABOUT: GAGAN KUMAR KESARI</span>`);br();
+    p(`<div class="sec"><div><span class="ow">NAME      :</span> <span class="ov">Gagan Kumar Kesari</span></div><div><span class="ow">ROLE      :</span> <span class="ov">Cloud Engineer | Cloud Security Enthusiast</span></div><div><span class="ow">EXP       :</span> <span class="ov">3+ Years across AWS, Azure, GCP</span></div><div><span class="ow">LOCATION  :</span> <span class="ov">Hyderabad, Telangana, India</span></div><div><span class="ow">EDUCATION :</span> <span class="ov">B.Tech CSE — UCE Kothagudam (2022)</span></div><div><span class="ow">STATUS    :</span> <span class="os">● OPEN TO WORK</span></div></div>`);
+    br();
+    p(`<span class="od">/* Cloud Engineer with 3+ years experience across AWS, Azure, GCP.</span>`);
+    p(`<span class="od"> * What drives me: identifying misconfigs, understanding attack</span>`);
+    p(`<span class="od"> * surfaces, building resilient secure cloud infrastructure.</span>`);
+    p(`<span class="od"> * Exploring: Offensive Security | Bug Bounty | CTFs | TryHackMe</span>`);
+    p(`<span class="od"> */</span>`);br();
+    ach('about','Profile Accessed! 👤');
+  },
+  skills(){
+    br();p(`<span class="oh">// SKILLS: TECHNICAL PROFICIENCY</span>`);br();
+    p(`<span class="ow">[ CLOUD PLATFORMS ]</span>`);
+    [['Amazon Web Services',75],['Microsoft Azure',70],['Google Cloud Platform',65],['Snowflake',72]].forEach(([n,pct])=>{
+      const f=Math.floor(pct/5),bar='█'.repeat(f)+'░'.repeat(20-f);
+      p(`
+<div class="br">
+<span class="bl">${n}</span>
+
+<div class="progress flex-grow-1 bg-dark border border-success" style="height:8px;">
+<div class="progress-bar bg-success" style="width:${pct}%"></div>
+</div>
+
+<span class="bp">${pct}%</span>
+</div>
+`);
+    });br();
+    p(`<span class="ow">[ SECURITY TOOLS ]</span>`);
+    p(['Fortigate','Palo Alto','TrendMicro','McAfee','Trellix','SIEM','Kali Linux','Nmap','Nessus','Metasploit','Burp Suite','Wireshark'].map(t=>`<span class="tag">${t}</span>`).join(''));br();
+    p(`<span class="ow">[ CLOUD SERVICES ]</span>`);
+    p(['EC2','S3','IAM','CloudWatch','AWS KMS','Azure Data Factory','Azure Blob','GKE','BigQuery','FHIR APIs','HIPAA','ServiceNow'].map(t=>`<span class="tag">${t}</span>`).join(''));br();
+    p(`<span class="ow">[ PROGRAMMING ]</span>`);
+    [['SQL',80],['Python',65],['Linux/Bash',70],['Java',50]].forEach(([n,pct])=>{
+      const f=Math.floor(pct/5),bar='█'.repeat(f)+'░'.repeat(20-f);
+      p(`<div class="br"><span class="bl">${n}</span><span style="color:var(--cyan);font-size:0.82rem">${bar}</span><span class="bp" style="color:var(--cyan)"> ${pct}%</span></div>`);
+    });br();
+    ach('skills','Skills Matrix Decoded! 🔓');
+  },
+  async experience(){
+    br();p(`<span class="oh">// EXPERIENCE: WORK HISTORY</span>`);br();
+    const jobs=[
+      {p:'DEC 2024 → PRESENT',r:'Cloud Engineer',c:'CloudLeaf LLC · Hyderabad',pts:['FHIR API PoC → migrated healthcare data to Azure with HIPAA compliance','Secure data pipelines using Azure Blob Storage + Azure Data Factory','IAM policies + cloud security configs across Azure and GCP','Monitored cloud infra for vulnerabilities and misconfigurations']},
+      {p:'JUL 2023 → JUL 2024',r:'Trainee Cloud Engineer (NATS Apprenticeship)',c:'Sify Technologies · Hyderabad',pts:['Managed enterprise security devices for Airport Authority of India','Tools: Trellix, TrendMicro, McAfee, Fortigate, Palo Alto','Monitored attacks, intrusions, unauthorized activity — 24x7 shifts','SIEM alerts monitoring and security incident handling']},
+      {p:'JUL 2022 → JUN 2023',r:'AWS Trainee Intern',c:'XTGlobal · Visakhapatnam',pts:['CloudWatch Monitoring → EC2, S3, ELB, VPN, MySQL, KMS','Real-time alerts and automated responses for infra issues','Created internal security runbook for team']},
+      {p:'JUN 2021 → JUL 2021',r:'Cyber Security Intern',c:'Gurugram Police Cyber Cell · Haryana',pts:['Analyzed cyber fraud with government officials','Studied: phishing, malware, DDoS, ransomware','Incident response and cybersecurity workshops']},
+    ];
+    for(const j of jobs){
+      p(`<span class="ow">▶ ${j.p}</span>`);
+      p(`<span class="ov" style="font-size:1rem">${j.r}</span>`);
+      p(`<span class="od">${j.c}</span>`);
+      j.pts.forEach(pt=>p(`  <span class="od">↳</span> <span class="ov" style="opacity:0.8">${pt}</span>`));
+      br();await sl(100);
+    }
+    ach('experience','Work History Extracted! 📋');
+  },
+  projects(){
+    br();p(`<span class="oh">// PROJECTS: WHAT I HAVE BUILT</span>`);br();
+    const projs=[
+      {n:'FHIR Healthcare Data Migration PoC',o:'CloudLeaf LLC | 2024-2025',d:'Migrated healthcare data from FHIR to Azure ensuring HIPAA compliance with secure pipelines.',s:['Azure Data Factory','FHIR APIs','Azure Blob','Python','HIPAA'],l:null},
+      {n:'AWS KMS Encryption Implementation',o:'XTGlobal | 2023',d:'Implemented Encryption at Rest for S3 using AWS KMS. Configured key policies and IAM controls.',s:['AWS KMS','Amazon S3','IAM','AWS CLI'],l:null},
+      {n:'SplitExPro — Expense Splitter App',o:'Personal Project | 2024',d:'Offline single-file expense splitting app with smart debt settlement, Excel export, dark/light mode.',s:['HTML5','Bootstrap 5','Chart.js','SheetJS','JS'],l:'https://gagan-gk.github.io/SplitExPro'},
+    ];
+    projs.forEach((pr,i)=>{
+      p(`<div class="sec"><div><span class="ow">[PROJECT_${i+1}]</span> <span class="ov" style="font-size:1rem">${pr.n}</span></div><div class="od">${pr.o}</div><div style="margin:0.4rem 0;color:var(--white);opacity:0.75">${pr.d}</div><div>${pr.s.map(t=>`<span class="tag">${t}</span>`).join('')}</div>${pr.l?`<div style="margin-top:0.5rem"><span class="od">LIVE →</span> <a href="${pr.l}" target="_blank" style="color:var(--cyan)">${pr.l}</a></div>`:''}</div>`);
+    });br();
+    ach('projects','Projects Accessed! 🚀');
+  },
+  certs(){
+    br();p(`<span class="oh">// CERTIFICATIONS & TRAINING</span>`);br();
+    p(`<span class="od">Total: <span class="os">45+</span> badges | GCP Silver League: <span class="os">28,335 pts</span></span>`);br();
+    [['❄️','Snowflake SnowPro Core','SNOWFLAKE','DEC 2025 → DEC 2027 ✓ ACTIVE'],['☁️','Cloud Security Fundamentals on GCP','GOOGLE CLOUD','JUL 2024'],['⎈','Deploy Kubernetes on GCP','GOOGLE CLOUD','JUL 2024'],['⚙️','DevOps Workflows on GCP','GOOGLE CLOUD','JUL 2024'],['📊','BigQuery ML & Data Engineering','GOOGLE CLOUD','JUL 2024'],['🟠','AWS Cloud Quest: Cloud Practitioner','AMAZON WEB SERVICES','MAR 2023'],['🌐','Introduction to Cybersecurity','CISCO','JUL 2023'],['🎯','TryHackMe — OhSINT·Nmap·Nessus·Metasploit·WebAppSec','TRYHACKME','2024'],['⭐','HackerRank SQL — 5 Star Gold Badge','HACKERRANK','ACTIVE']].forEach(([ic,n,iss,v])=>{
+      p(`${ic} <span class="ov">${n}</span> <span class="od">// ${iss}</span>`);
+      p(`   <span class="od" style="font-size:0.78rem">↳ ${v}</span>`);
+    });br();
+    ach('certs','Credentials Verified! 🏅');
+  },
+  contact(){
+    br();p(`<span class="oh">// CONTACT: ESTABLISH CONNECTION</span>`);br();
+    p(`<div class="sec"><div><span class="ow">EMAIL    :</span> <span class="ov">gagankumargoud@gmail.com</span></div><div><span class="ow">LINKEDIN :</span> <span class="oc">linkedin.com/in/gagan-gk</span></div><div><span class="ow">GITHUB   :</span> <span class="oc">github.com/gagan-gk</span></div><div><span class="ow">CREDLY   :</span> <span class="oc">credly.com/users/gagan-kumar-goud-kesari</span></div><div><span class="ow">GCP      :</span> <span class="oc">skills.google/public_profiles/f773eb17...</span></div><div><span class="ow">STATUS   :</span> <span class="os">● OPEN TO CLOUD & SECURITY ROLES</span></div></div>`);br();
+    p(`<span class="od">// Ping me for Cloud Engineering or Cloud Security opportunities</span>`);br();
+    ach('contact','Channel Opened! 📡');
+  },
+  ls(){
+    br();p(`<span class="od">total 8 files</span>`);
+    [['about.txt','identity & bio'],['skills.db','technical skills'],['experience.log','work history'],['projects/','built things'],['certs.json','credentials & badges'],['contact.conf','reach me'],['secrets.enc','[ENCRYPTED]']].forEach(([f,d])=>p(`drwxr-xr-x  <span class="oc">${f}</span>  <span class="od">// ${d}</span>`));
+    br();p(`<span class="od">// Run <span class="oc">cat &lt;file&gt;</span> or type command name directly</span>`);br();
+  },
+  async hack(){
+    br();p(`<span class="ow">INITIATING HACK SEQUENCE...</span>`);
+    for(const t of ['AWS IAM','Azure AD','GCP IAM','Snowflake','FHIR Gateway','Fortigate FW','Palo Alto NGFW','SIEM Console']){
+      await sl(180);p(`<span class="od">SCANNING</span> <span class="oc">${t}</span> <span class="od">...</span> <span class="os">ACCESS GRANTED ✓</span>`);
+    }
+    await sl(500);br();
+    p(`<span class="glitch osp">▓▓▓ SYSTEM BREACH COMPLETE ▓▓▓</span>`);
+    await sl(400);
+    p(`<span class="ow">Wait... this is MY system. I built this 😄</span>`);br();
+    p(`<span class="od">// No harm done. Try: <span class="oc">sudo hire gagan</span></span>`);br();
+    ach('hack','Elite Hacker Mode! 🎯');
+  },
+  clear(){out.innerHTML='';welcome()},
+  matrix(){
+    const c=document.getElementById('mx'),curr=parseFloat(c.style.opacity||0.07);
+    c.style.transition='opacity 0.5s';
+    if(curr<0.15){c.style.opacity='0.3';p(`<span class="os">MATRIX INTENSITY: MAXIMUM ▓▓▓</span>`);}
+    else{c.style.opacity='0.07';p(`<span class="os">MATRIX INTENSITY: NORMAL</span>`);}br();
+  },
+  async 'sudo hire gagan'(){
+    br();p(`<span class="ow">[sudo] password for recruiter: </span>`);await sl(1800);
+    p(`<span class="os">Authentication successful.</span>`);await sl(300);
+    p(`<span class="ow">Executing: hire gagan_kumar_kesari --role=cloud-security --package=competitive...</span>`);
+    await sl(400);
+    for(const s of ['Offer letter generated','Salary: market rate + 20%','Remote/Hybrid work enabled','Cloud Security role configured','Team onboarding scheduled']){
+      await sl(200);p(`<span class="os">✓ ${s}</span>`);
+    }
+    await sl(500);br();
+    p(`<span class="oh">EXCELLENT DECISION. 🎯</span>`);
+    p(`<span class="od">Email   : gagankumargoud@gmail.com</span>`);
+    p(`<span class="od">LinkedIn: linkedin.com/in/gagan-gk</span>`);br();
+    ach('hired','Best Decision Ever! 🚀🎉');
+  },
+  secrets(){
+    br();p(`<span class="oe">ERROR: Permission denied (Level 5 clearance required)</span>`);
+    setTimeout(()=>{p(`<span class="ow">...but since you tried: I have 80,000 reasons to find a new job ASAP 😅</span>`);p(`<span class="od">Try: <span class="oc">sudo hire gagan</span></span>`);br();},600);
+    ach('secrets','Secret Hunter! 🕵️');
+  },
+};
+
+const catMap={'about.txt':'about','skills.db':'skills','experience.log':'experience','projects':'projects','projects/':'projects','certs.json':'certs','contact.conf':'contact','secrets.enc':'secrets'};
+const allKeys=Object.keys(cmds).concat(Object.keys(catMap).map(k=>'cat '+k));
+
+let hist=[],hidx=-1;
+const ci=document.getElementById('ci');
+
+ci.addEventListener('keydown',async e=>{
+  if(e.key==='Enter'){
+    const raw=ci.value.trim();
+    if(!raw)return;
+    hist.unshift(raw);hidx=-1;
+    p(`<span class="od">Gagan_Kumar@cloud-bastion:~$</span> <span class="oc">${raw}</span>`);
+    ci.value='';
+    let key=raw.toLowerCase();
+    if(key.startsWith('cat ')){const f=key.slice(4).trim();key=catMap[f]||'__unknown__';}
+    const fn=cmds[key];
+    if(fn)await fn();
+    else{br();p(`<span class="oe">bash: ${raw}: command not found</span>`);p(`<span class="od">Type <span class="oc">help</span> to see commands</span>`);br();}
+    out.scrollTop=out.scrollHeight;
+  }
+  if(e.key==='ArrowUp'){e.preventDefault();if(hidx<hist.length-1){hidx++;ci.value=hist[hidx];}}
+  if(e.key==='ArrowDown'){e.preventDefault();if(hidx>0){hidx--;ci.value=hist[hidx];}else{hidx=-1;ci.value='';}}
+  if(e.key==='Tab'){e.preventDefault();const part=ci.value.toLowerCase();const m=allKeys.find(c=>c.startsWith(part));if(m)ci.value=m;}
+});
+
+document.addEventListener('click',()=>ci.focus());
+runBoot();
+</script>
+</body>
+</html>
